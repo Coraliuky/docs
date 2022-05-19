@@ -1,4 +1,4 @@
-# Guide to the installation of Paddle IPU
+# Guide to the Installation of Paddle IPU
 
 The Paddle IPU supports the training and original inference in Python based on Graphcore IPU. Now the supported Poplar version is 2.5.0, and there are two installation methods: 
 
