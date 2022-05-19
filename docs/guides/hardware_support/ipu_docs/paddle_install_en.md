@@ -2,25 +2,25 @@
 
 The Paddle IPU supports the training and original inference in Python based on Graphcore IPU. Now the supported Poplar version is 2.5.0, and there are two installation methods: 
 
-- Docker镜像方式启动
-- 通过源代码编译安装
+- Run docker images
+- Perform compilation and installation through the source code 
 
-## Docker镜像方式启动
+## Run docker images
 
-当前 Docker 镜像包含预编译的飞桨框架 IPU 版，镜像基于 Ubuntu18.04 基础镜像构建，内置的 Python 版本为 Python3.7。
+Docker images currently include pre-compiled Paddle IPU, which is built on Ubuntu18.04. Its built-in Python is Python3.7.
 
-**第一步**：拉取飞桨框架 IPU 版镜像
+**Step 1**：Pull the Paddle IPU image
 
 ```bash
 docker pull registry.baidubce.com/device/paddlepaddle:ipu-poplar250
 ```
 
-**第二步**：构建并进入 Docker 容器
+**Step 2**：Create and start a docker container 
 
-**注意**：容器启动命令需将主机端的 IPUoF 配置文件映射到容器中，可通过设置 IPUOF_CONFIG_PATH 环境变量指向 IPUoF 配置文件传入，更多关于 IPUoF 配置的信息请访问 [Graphcore: IPUoF configuration file](https://docs.graphcore.ai/projects/vipu-admin/en/latest/cli_reference.html?highlight=ipuof#ipuof-configuration-file)。
+**Attention**：The container start command should map the IPUoF configuration file on the host to the container. You can set the environment variable IPUOF_CONFIG_PATH to pass the IPUoF configuration file. For more about IPUoF configuration, please refer to [Graphcore: IPUoF configuration file](https://docs.graphcore.ai/projects/vipu-admin/en/latest/cli_reference.html?highlight=ipuof#ipuof-configuration-file).
 
 ```bash
-# 注意替换这里的 /home/<username> 到对应的用户目录
+# You need to replace /home/<username> under the corresponding user directory
 export IPUOF_CONFIG_PATH=/opt/ipuof.conf
 docker run -it --name paddle-ipu -v /home/<username>:/workspace \
      --shm-size=128G --network=host --ulimit memlock=-1:-1 \
@@ -30,12 +30,12 @@ docker run -it --name paddle-ipu -v /home/<username>:/workspace \
      registry.baidubce.com/device/paddlepaddle:ipu-poplar250 /bin/bash
 ```
 
-**第三步**：检查容器运行环境
+**Step 3**：Check the runtime environment of the container 
 
 ```bash
-# 检查容器是否可以正确识别 IPU 设备
+# Check whether the container can recognize IPU devices correctly
 gc-monitor
-# 预期得到如下结果
+# The expected result is: 
 +---------------+--------------------------------------------------------------------------------+
 |  gc-monitor   |              Partition: ipuof [active] has 4 reconfigurable IPUs               |
 +-------------+--------------------+--------+--------------+----------+------+----+------+-------+
@@ -50,82 +50,81 @@ gc-monitor
 |                             No attached processes in partition ipuof                             |
 +--------------------------------------------------------------------------------------------------+
 
-# 检查飞桨框架 IPU 版已经安装
+# Check whether the Paddle IPU is installed 
 pip list | grep paddlepaddle-ipu
-# 预期得到如下结果
+# The expected result is
 paddlepaddle-ipu       0.0.0.dev250
 
-# 检查飞桨框架 IPU 版正常工作
+# Check whether the Paddle IPU works well
 python -c "import paddle; paddle.utils.run_check()"
-# 预期得到如下结果
+# The expected result is
 Running verify PaddlePaddle program ...
 PaddlePaddle works well on 1 CPU.
 PaddlePaddle works well on 2 CPUs.
 PaddlePaddle is installed successfully! Let's start deep learning with PaddlePaddle now.
 ```
 
-## 通过源代码编译安装
+## Perform compilation and installation through the source code
 
-**预先要求**：建议在 Docker 环境内进行飞桨框架 IPU 版的源码编译，容器环境配置和启动命令请参考上一章节的内容。
+**Prerequisite**：It is recommended to compile the source code of the Paddle IPU in the docker environment. For the configuration of the container environment and its start command, please refer to the previous section. 
 
-**第一步**：检查容器编译环境
+**Step 1**：Check the compilation environment of the container检查容器编译环境
 
-请在编译之前，检查如下的环境变量是否正确，如果没有则需要安装相应的依赖库，并导出相应的环境变量。
+Before compilation, confirm whether the settings of the following environment variables are correct. If not, please install corresponding dependencies and export the variables.
 
 ```bash
-# PATH 中存在 GCC/G++ 8.2
+# In PATH there is GCC/G++ 8.2
 export PATH=/opt/compiler/gcc-8.2/bin:${PATH}
 
-# PATH 中存在 cmake 3.16.0
+# In PATH there is cmake 3.16.0
 export PATH=/opt/cmake-3.16/bin:${PATH}
 
-# PATH 与 LD_LIBRARY_PATH 中存在 popart 与 poplar
+# In PATH and LD_LIBRARY_PATH, there are popart and poplar respectively
 export PATH=/opt/popart/bin:/opt/poplar/lib:${PATH}
 export LD_LIBRARY_PATH=/opt/popart/lib:/opt/poplar/lib:${LD_LIBRARY_PATH}
 
-# PATH 中存在 Python 3.7
-# 注意：镜像中的 python 3.7 通过 miniconda 安装，请通过 conda activate base 命令加载Python 3.7环境
+# In PATH there is Python 3.7
+# Attention：The python 3.7 in the image is installed by miniconda. Use the command of conda activate base to load the Python 3.7 environment. 
 export PATH=/opt/conda/bin:${PATH}
 ```
 
-**第二步**：下载 Paddle 源码并编译，CMAKE 编译选项含义请参见[编译选项表](https://www.paddlepaddle.org.cn/documentation/docs/zh/develop/install/Tables.html#Compile)
+**Step 2**：Download and compile the Paddle's source code. To know the meaning of the CMAKE compilation options, please refer to [compilation option table](https://www.paddlepaddle.org.cn/documentation/docs/zh/develop/install/Tables.html#Compile)
 
 ```bash
-# 下载源码，默认 develop 分支
+# Download the source code to the develop branch by default
 git clone https://github.com/PaddlePaddle/Paddle.git
 cd Paddle
 
-# 创建编译目录
+# Make a compilation directory
 mkdir build && cd build
 
-# 执行 cmake
+# Execute cmake
 cmake .. -DPY_VERSION=3.7 -DWITH_IPU=ON -DWITH_MKL=ON \
          -DPOPLAR_DIR=/opt/poplar -DPOPART_DIR=/opt/popart \
          -DWITH_TESTING=ON -DCMAKE_BUILD_TYPE=Release
 
-# 使用以下命令来编译
+# Use the following command for compilation
 make -j$(nproc)
 ```
 
-**第三步**：安装与验证编译生成的 whl 包
+**Step 3**：Install and verify the compiled whl package
 
-编译完成之后进入 `Paddle/build/python/dist` 目录即可找到编译生成的 .whl 安装包，安装与验证命令如下：
-
+After compilation, enter into `Paddle/build/python/dist` to find the compiled .whl package. The command of installation and verification is: 
 ```bash
-# 安装命令
+# Installation command
 python -m pip install -U paddlepaddle_ipu-0.0.0-cp37-cp37m-linux_x86_64.whl
 
-# 验证命令
+# Verfication command 
 python -c "import paddle; paddle.utils.run_check()"
-# 预期得到如下结果
+# The expected result is:
 Running verify PaddlePaddle program ...
 PaddlePaddle works well on 1 CPU.
 PaddlePaddle works well on 2 CPUs.
 PaddlePaddle is installed successfully! Let's start deep learning with PaddlePaddle now.
 ```
-## 如何卸载
+## How to uninstall the Paddle IPU
 
-请使用以下命令卸载 Paddle：
+Please use this command to uninstall the Paddle IPU:
 
 ```bash
 pip uninstall paddlepaddle-ipu
