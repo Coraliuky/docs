@@ -4,13 +4,13 @@ The information of the hardware supported by products of PaddlePaddle is as foll
 
 ## PaddlePaddle
 
-|  Class  | Architecture | Company | Product Model | Installation | Source-Code Compilation |  Whether the Training is Fully Supported | 支持部分模型 |
+|  Class  | Architecture | Company | Product Model | Installation | Source-Code Compilation |  Whether the Training is Fully Supported | Whether Some Models are Supported |
 |  ----  | ----  | ---- | ---- |---- | ---- |---- | ---- |
-| 服务端CPU | x86 | Intel | 常见CPU型号如Xeon、Core全系列 | [安装](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/install/pip/linux-pip.html) | [源码编译](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/install/compile/linux-compile.html) | ✔️ |  |
-| 服务端GPU |  | NVIDIA | 常见GPU型号如V100、T4等| [安装](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/install/pip/linux-pip.html) | [源码编译](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/install/compile/linux-compile.html) | ✔️ |  |
-| AI加速芯片 | 达芬奇 | 华为 | 昇腾910 | [安装](./npu_docs/paddle_install_cn.html) | [源码编译](./npu_docs/paddle_install_cn.html#anzhuangfangshi-tongguoyuanmabianyianzhuang) | | ✔️ |
-| AI加速芯片 |  | 海光 | 海光DCU | [安装](./rocm_docs/paddle_install_cn.html#wheel) | [源码编译](./rocm_docs/paddle_install_cn.html#anzhuangfangshier-tongguoyuanmabianyianzhuang) | ✔️ | [支持模型](./rocm_docs/paddle_rocm_cn.html) |
-| AI加速芯片 | XPU | 百度 | 昆仑K200、R200等 | [安装](./xpu_docs/paddle_install_xpu2_cn.html#wheel) | [源码编译](./xpu_docs/paddle_install_xpu2_cn.html#xpu) |  | [支持模型](./xpu_docs/paddle_2.0_xpu2_cn.html) |
+| Server-Side CPU | x86 | Intel | Common CPU models include Xeon and Core series| [Installation](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/install/pip/linux-pip.html) | [Source-Code Compilation](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/install/compile/linux-compile.html) | ✔️ |  |
+| Server-Side GPU |  | NVIDIA | Common GPU models include V100 and T4| [Installation](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/install/pip/linux-pip.html) | [Source-Code Compilation](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/install/compile/linux-compile.html) | ✔️ |  |
+| AI Acceleration Chip | 达芬奇 | 华为 | 昇腾910 | [安装](./npu_docs/paddle_install_cn.html) | [源码编译](./npu_docs/paddle_install_cn.html#anzhuangfangshi-tongguoyuanmabianyianzhuang) | | ✔️ |
+| AI Acceleration Chip |  | 海光 | 海光DCU | [安装](./rocm_docs/paddle_install_cn.html#wheel) | [源码编译](./rocm_docs/paddle_install_cn.html#anzhuangfangshier-tongguoyuanmabianyianzhuang) | ✔️ | [支持模型](./rocm_docs/paddle_rocm_cn.html) |
+| AI Acceleration Chip | XPU | 百度 | 昆仑K200、R200等 | [安装](./xpu_docs/paddle_install_xpu2_cn.html#wheel) | [源码编译](./xpu_docs/paddle_install_xpu2_cn.html#xpu) |  | [支持模型](./xpu_docs/paddle_2.0_xpu2_cn.html) |
 | AI加速芯片 | IPU | Graphcore | GC200 | | [源码编译](./ipu_docs/paddle_install_cn.html) |  | |
 
 ## Paddle Inference
