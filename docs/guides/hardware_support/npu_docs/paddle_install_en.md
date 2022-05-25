@@ -101,7 +101,7 @@ PaddlePaddle is installed successfully! Let's start deep learning with PaddlePad
 
 ## Uninstallation
 
-Run the following command to uninstall Paddle:
+Run the following command to uninstall the PaddlePaddle NPU version:
 
 ```bash
 pip uninstall paddlepaddle-npu
