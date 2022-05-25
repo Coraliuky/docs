@@ -17,15 +17,14 @@ The Ascend 910 NPU version of PaddlePaddle only supports the source-code compila
 
 ## How to install：Use the source-code compilation
 
-**Step 1**：Prepare the runtime environment of CANN Community 5.0.2.alpha005. (The Paddle mirror is recommended.)
+**Step 1**：Prepare the runtime environment of the CANN Community 5.0.2.alpha005. (The Paddle mirror is recommended.)
 
-可以直接从Paddle的官方镜像库拉取预先装有 CANN 社区版 5.0.2.alpha005 的 docker 镜像，或者根据 [CANN社区版安装指南](https://support.huaweicloud.com/instg-cli-cann502-alpha005/atlasdeploy_03_0002.html) 来准备相应的开发与运行环境。
-
+You can pull the docker image where the CANN Community 5.0.2.alpha005 has been installed beforehand from the official image library of PaddlePaddle, or you can prepare the developing and runtime environment by following the [Guide to Installing the CANN Community](https://support.huaweicloud.com/instg-cli-cann502-alpha005/atlasdeploy_03_0002.html) .
 ```bash
-# 拉取镜像
+# Pull the docker image
 docker pull paddlepaddle/paddle:latest-dev-cann5.0.2.alpha005-gcc82-aarch64
 
-# 启动容器，注意这里的参数 --device，容器仅映射设备ID为4到7的4张NPU卡，如需映射其他卡相应增改设备ID号即可
+# Start the docker container and pay attention to a parameter --device. The container only maps four NPU cards whose device ID numbers are between 4 and 7. If you want it to map other cards, just modify their ID numbers.
 docker run -it --name paddle-npu-dev -v /home/<user_name>:/workspace  \
             --pids-limit 409600 --network=host --shm-size=128G \
             --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
@@ -39,10 +38,10 @@ docker run -it --name paddle-npu-dev -v /home/<user_name>:/workspace  \
             -v /usr/local/dcmi:/usr/local/dcmi \
             paddlepaddle/paddle:latest-dev-cann5.0.2.alpha005-gcc82-aarch64 /bin/bash
 
-# 检查容器中是否可以正确识别映射的昇腾DCU设备
+# Check whether the container can recognize the mapped Ascend DCU correctly.
 npu-smi info
 
-# 预期得到类似如下的结果
+# The result is expected to be like:
 +------------------------------------------------------------------------------------+
 | npu-smi 1.9.3                    Version: 21.0.rc1                                 |
 +----------------------+---------------+---------------------------------------------+
@@ -63,46 +62,46 @@ npu-smi info
 +======================+===============+=============================================+
 ```
 
-**第二步**：下载Paddle源码并编译，CMAKE编译选项含义请参见[编译选项表](https://www.paddlepaddle.org.cn/documentation/docs/zh/develop/install/Tables.html#Compile)
+**Step 2**：Download the source code of PaddlePaddle and have it compiled. To get the meaning of CMAKE compilation options, please refer to the [Compilation Option Table](https://www.paddlepaddle.org.cn/documentation/docs/zh/develop/install/Tables.html#Compile)
 
 ```bash
-# 下载源码
+# Download the source code
 git clone https://github.com/PaddlePaddle/Paddle.git
 cd Paddle
 
-# 创建编译目录
+# Create the compilation directory
 mkdir build && cd build
 
-# 执行cmake
+# Execute cmake
 cmake .. -DPY_VERSION=3.7 -DWITH_ASCEND=OFF -DWITH_ARM=ON -DWITH_ASCEND_CL=ON \
          -DWITH_ASCEND_INT64=ON -DWITH_DISTRIBUTE=ON -DWITH_TESTING=ON -DON_INFER=ON \
          -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
-# 使用以下命令来编译
+# Use the following command line for compilation
 make TARGET=ARMV8 -j$(nproc)
 ```
 
-**第三步**：安装与验证编译生成的wheel包
+**Step 3**：Install and verify the compiled wheel package
 
-编译完成之后进入`Paddle/build/python/dist`目录即可找到编译生成的.whl安装包，安装与验证命令如下：
+After compilation, enter into `Paddle/build/python/dist`and find the .whl installation package. Commands of installation and verification are:
 
 ```bash
-# 安装命令
+# Installation command
 python -m pip install -U paddlepaddle_npu-0.0.0-cp37-cp37m-linux_aarch64.whl
 
-# 验证命令
+# Verification command
 python -c "import paddle; paddle.utils.run_check()"
 
-# 预期得到类似以下结果：
+# The result is expected to be like: 
 Running verify PaddlePaddle program ...
 PaddlePaddle works well on 1 NPU.
 PaddlePaddle works well on 4 NPUs.
 PaddlePaddle is installed successfully! Let's start deep learning with PaddlePaddle now.
 ```
 
-## 如何卸载
+## Uninstallation
 
-请使用以下命令卸载Paddle:
+Run the following command to uninstall Paddle:
 
 ```bash
 pip uninstall paddlepaddle-npu
