@@ -1,4 +1,4 @@
-# Example of Training on the ROCm Version of PaddlePaddle
+# Example of Training on the Paddle ROCm Version
 
 There is no much differnce training with the Hygon CPU/DCU or with the Intel CPU/Nvidia GPU. The Paddle ROCm version can fully support APIs of the Paddle CUDA version, and you can use the same commands and parameters of the GPU training.
 
