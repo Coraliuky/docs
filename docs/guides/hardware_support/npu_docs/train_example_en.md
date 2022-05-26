@@ -1,6 +1,6 @@
 # Example of Training on the Ascend NPU Version of PaddlePaddle
 
-## Example of training YOLOv3 
+## Example of Training YOLOv3 
 
 **Step 1**：Download and install PaddleDetection Suites
 
