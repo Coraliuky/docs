@@ -1,4 +1,4 @@
-# Example of Training the Ascend NPU Version of PaddlePaddle
+# Example of Training on the Ascend NPU Version of PaddlePaddle
 
 ## Training Example of YOLOv3 
 
