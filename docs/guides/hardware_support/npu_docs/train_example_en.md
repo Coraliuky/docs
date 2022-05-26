@@ -119,13 +119,13 @@ address_3=192.168.40.22
 netmask_3=255.255.255.0
 ```
 
-**Step 2**：Create the configuration file of the training with a single machine and four cards following the [hccl_tools description document](https://github.com/mindspore-ai/mindspore/tree/v1.4.0/model_zoo/utils/hccl_tools) on the official website of Huawei. 
+**Step 2**：Create the configuration file of the training with a single computer and four cards following the [hccl_tools description document](https://github.com/mindspore-ai/mindspore/tree/v1.4.0/model_zoo/utils/hccl_tools) on the official website of Huawei. 
 
 ```
 # Download the file hccl_tools.py
 wget https://raw.githubusercontent.com/mindspore-ai/mindspore/v1.4.0/model_zoo/utils/hccl_tools/hccl_tools.py
 
-# Create the configuration file of the training with a single machine and two cards. The IP of the machine can be 127.0.0.1
+# Create the configuration file of the training with a single computer and two cards. The IP of the computer can be 127.0.0.1
 python hccl_tools.py --device_num "[0,4)" --server_ip 127.0.0.1
 ```
 
