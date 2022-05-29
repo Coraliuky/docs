@@ -4,7 +4,7 @@ Paddle 2.0 and its subsequent versions can all run on the KUNLUN XPU chips. Supp
 
 ## Training Support
 
-Model training can be single-computer single-card/multi-card training. 
+Models that can perform single-computer single-card/multi-card training are: 
 
 | Model               | Field     | Model readme                                                   | Coding Paradigm      | Available CPU           | Whether the single-computer multi-card training is supported   |
 | ------------------ | -------- | ------------------------------------------------------------ | ------------- | ----------------------- | -------------- |
