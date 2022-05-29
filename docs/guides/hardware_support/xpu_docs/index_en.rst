@@ -10,7 +10,7 @@ You can quickly get started with the KUNLUN XPU chips and get to know how to run
 KUNLUN Chips of Generation 2: 
 
     - `Support for KUNLUN Generation 2 offered by PaddlePaddle <./paddle_2.0_xpu_cn.html>`_ : PaddlePaddle can run on the KUNLUN Generation 2 chips (R200, R300).
-    - `Instruction on installing KUNLUN Generation 2 chips which are based on the Paddle framework <./paddle_install_cn.html>`_ : Instruction on installing KUNLUN Generation 2 chips (R200, R300) 
+    - `Instruction on installing the Paddle KUNLUN Generation 2 chips which are based on the Paddle framework <./paddle_install_cn.html>`_ : Instruction on installing KUNLUN Generation 2 chips (R200, R300) 
     - `Example of training on KUNLUN Generation 2 chips which are supported by the Paddle framework <./train_example_cn.html>`_ : Example of training on KUNLUN Generation 2 chips (R200, R300) 
 
 KUNLUN Chips of Generation 1: 
@@ -18,7 +18,7 @@ KUNLUN Chips of Generation 1:
     - `Support for KUNLUN Generation 1 offered by PaddlePaddle <./paddle_2.0_xpu_cn.html>`_ : PaddlePaddle can run on the KUNLUN Generation 1 chips (K100, K200).
     - `Instruction on installing the KUNLUN Generation 1 chips which are supported by the Paddle framework <./paddle_install_cn.html>`_ : Instruction on installing the KUNLUN Generation 1 chips (K100, K200)
     - `Example of training on the KUNLUN Generation 1 chips which are supported by the Paddle framework <./train_example_cn.html>`_ : Example of training on the KUNLUN Generation 1 chips (K100, K200) 
-    - `How to Install and Use the KUNLUN Generation 1 chips which are based on the Paddle inference library <./inference_install_example_cn.html>`_ : Demo of installing and using the KUNLUN Generation 1 chips (K100, K200) which are based on the Paddle inference library    
+    - `How to Install and Use the Paddle inference library used on the KUNLUN Generation 1 chips  <./inference_install_example_cn.html>`_ : Demo of installing and using the Paddle inference library used on the KUNLUN Generation 1 chips (K100, K200)    
 
 ..  toctree::
     :hidden:
